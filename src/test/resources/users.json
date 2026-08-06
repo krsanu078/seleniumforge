@@ -1,0 +1,5 @@
+[
+  {"username": "standard_user", "password": "secret_sauce", "role": "standard"},
+  {"username": "locked_out_user", "password": "secret_sauce", "role": "locked"},
+  {"username": "problem_user", "password": "secret_sauce", "role": "problem"}
+]

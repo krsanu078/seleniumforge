@@ -5,6 +5,7 @@ import com.seleniumforge.pages.CartPage;
 import com.seleniumforge.pages.HomePage;
 import com.seleniumforge.pages.LoginPage;
 import com.seleniumforge.retry.RetryAnalyzer;
+import com.seleniumforge.tests.providers.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,9 +18,8 @@ import java.util.List;
 @Listeners(TestListener.class)
 public class AddToCartTest extends com.seleniumforge.base.BaseTest {
 
-    @Test(groups = {"regression"}, retryAnalyzer = RetryAnalyzer.class)
-    public void addProductToCart() {
-        String productName = "Sauce Labs Backpack";
+    @Test(dataProvider = "products", dataProviderClass = TestDataProvider.class, groups = {"regression"}, retryAnalyzer = RetryAnalyzer.class)
+    public void addProductToCart(String productName) {
         LoginPage loginPage = new LoginPage();
         loginPage.login("standard_user", "secret_sauce");
         HomePage home = new HomePage();

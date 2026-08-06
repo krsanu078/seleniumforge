@@ -5,6 +5,7 @@ import com.seleniumforge.pages.HomePage;
 import com.seleniumforge.pages.LoginPage;
 import com.seleniumforge.pages.ProductPage;
 import com.seleniumforge.retry.RetryAnalyzer;
+import com.seleniumforge.tests.providers.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,9 +16,8 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class SearchProductTest extends com.seleniumforge.base.BaseTest {
 
-    @Test(groups = {"regression"}, retryAnalyzer = RetryAnalyzer.class)
-    public void openProductAndVerifyDetails() {
-        String productName = "Sauce Labs Backpack";
+    @Test(dataProvider = "products", dataProviderClass = TestDataProvider.class, groups = {"regression"}, retryAnalyzer = RetryAnalyzer.class)
+    public void openProductAndVerifyDetails(String productName) {
         LoginPage loginPage = new LoginPage();
         loginPage.login("standard_user", "secret_sauce");
         HomePage home = new HomePage();
