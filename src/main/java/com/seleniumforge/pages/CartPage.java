@@ -1,6 +1,8 @@
 package com.seleniumforge.pages;
 
 import com.seleniumforge.base.BasePage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
  * CartPage models the shopping cart page and its actions.
  */
 public class CartPage extends BasePage {
+
+    private static final Logger LOGGER = LogManager.getLogger(CartPage.class);
 
     @FindBy(css = ".cart_item")
     private List<WebElement> cartItems;
@@ -41,6 +45,7 @@ public class CartPage extends BasePage {
      * @param name product name to remove
      */
     public void removeProductByName(String name) {
+        LOGGER.info("Removing product from cart: {}", name);
         Optional<WebElement> match = cartItems.stream().filter(item -> {
             try {
                 String title = item.findElement(By.cssSelector(".inventory_item_name")).getText();
@@ -59,6 +64,7 @@ public class CartPage extends BasePage {
      * Proceed to the checkout information page.
      */
     public void proceedToCheckout() {
+        LOGGER.info("Proceeding to checkout");
         click(checkoutButton);
     }
 }
